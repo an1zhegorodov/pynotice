@@ -13,9 +13,6 @@ def slack_webhook():
     data = request.json
     data["event"] = request.headers["X-Event-Key"]
 
-    if not data["pullrequest"]["reviewers"]:
-        return False
-
     notification = notification_factory.create(data)
     return sender.send(notification)
 
